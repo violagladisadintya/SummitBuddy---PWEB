@@ -1,61 +1,87 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>SummitBuddy</title>
-<style>
-body{font-family:Arial;margin:0;background:#f4f4f4}
-
-header{background:#2c3e50;color:white;padding:15px}
-nav{background:#34495e;padding:10px}
-nav a{color:white;margin-right:20px;text-decoration:none}
-
-.container{display:flex;padding:20px}
-main{flex:3}
-aside{flex:1;background:white;padding:15px;margin-left:20px}
-
-footer{background:#2c3e50;color:white;text-align:center;padding:15px;margin-top:20px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummitBuddy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header style="display:flex; align-items:center; gap:15px;">
-<img src="logo.png"  width="100">
-<div>
-<h1>SummitBuddy</h1>
-<p>Sistem Penyewaan Alat Pendakian</p>
-</div>
-</header>
-
 <nav>
-<a href="index.html">Home</a>
-<a href="formsewa.html">Form Sewa</a>
-<a href="dataalat.html">Data Alat</a>
+    <div class="logo">
+        <img src="logo.png">
+        <span>SummitBuddy</span>
+    </div>
+
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="dataalat.html">Data</a>
+        <a href="formsewa.html">Sewa</a>
+    </div>
 </nav>
+
+<header class="hero">
+    <div>
+        <h1>SummitBuddy</h1>
+        <p>Sistem Penyewaan Alat Pendakian</p>
+    </div>
+</header>
 
 <div class="container">
 
-<main>
-<h2>Selamat Datang di SummitBuddy</h2>
-<p>
-SummitBuddy adalah sistem penyewaan alat pendakian yang membantu kamu mencari dan menyewa perlengkapan gunung dengan lebih mudah. 
-Mulai dari tenda, carrier, hingga perlengkapan lainnya bisa dikelola dan dilihat ketersediaannya melalui sistem ini.
-</p>
-</main>
+    <section>
 
-<aside>
-<h3>Statistik</h3>
-<p>Total Alat : 33</p>
-<p>Total Penyewa : 12</p>
-<p>Alat Tersedia : 25</p>
-<p>Alat Dipinjam : 8</p>
-</aside>
+      
+        <main>
+            <h2>Selamat Datang di SummitBuddy</h2>
+            <p>
+            SummitBuddy adalah sistem penyewaan alat pendakian yang membantu kamu mencari dan menyewa perlengkapan gunung dengan lebih mudah. 
+            Mulai dari tenda, carrier, hingga perlengkapan lainnya bisa dikelola dan dilihat ketersediaannya melalui sistem ini.
+            </p>
+        </main>
+
+        <h2>Alat Populer</h2>
+
+        
+        <div class="grid">
+
+            <div class="card">
+                <img src="Tenda.jpg">
+                <p>Tenda</p>
+            </div>
+
+            <div class="card">
+                <img src="Carrier Bag 60L.jpg">
+                <p>Carrier</p>
+            </div>
+
+            <div class="card">
+                <img src="SleepingBag.jpg">
+                <p>Sleeping Bag</p>
+            </div>
+
+            <div class="card">
+                <img src="Kompor.jpg">
+                <p>Kompor</p>
+            </div>
+
+            <div class="card">
+                <img src="Matras.jpg">
+                <p>Matras</p>
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 
 <footer>
-<p>© 2026 SummitBuddy</p>
+    <div class="footer-section">SummitBuddy</div>
+    <div class="footer-section">Menu</div>
+    <div class="footer-section">Kontak</div>
 </footer>
 
 </body>

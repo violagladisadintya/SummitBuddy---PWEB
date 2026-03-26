@@ -1,85 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Form Sewa - SummitBuddy</title>
-
-<style>
-body{font-family:Arial;margin:0;background:#f4f4f4}
-
-header{background:#2c3e50;color:white;padding:15px}
-nav{background:#34495e;padding:10px}
-nav a{color:white;margin-right:20px;text-decoration:none}
-
-form{background:white;padding:20px;margin:20px;border-radius:5px}
-
-input,select,textarea{
-width:100%;
-padding:8px;
-margin-bottom:10px;
-}
-
-button{
-padding:10px 20px;
-background:#2c3e50;
-color:white;
-border:none;
-}
-
-footer{background:#2c3e50;color:white;text-align:center;padding:15px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Sewa</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-<h1>SummitBuddy</h1>
-</header>
-
 <nav>
-<a href="index.html">Home</a>
-<a href="formsewa.html">Form Sewa</a>
-<a href="dataalat.html">Data Alat</a>
+    <div class="logo">
+        <img src="logo.png">
+        <span>SummitBuddy</span>
+    </div>
+
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="dataalat.html">Data</a>
+        <a href="formsewa.html">Sewa</a>
+    </div>
 </nav>
 
-<form>
+<header class="hero">
+    <h1>Form Penyewaan</h1>
+</header>
 
-<h2>Form Penyewaan Alat</h2>
+<div class="container">
+    <section>
 
-<label>Nama Penyewa</label>
-<input type="text">
+        <form>
 
-<label>No HP</label>
-<input type="text">
+            <label>Nama Penyewa</label>
+            <input type="text">
 
-<label>Nama Alat</label>
-<select>
-<option>Tenda</option>
-<option>Carrier</option>
-<option>Sleeping Bag</option>
-</select>
+            <label>No HP</label>
+            <input type="text">
 
-<label>Jumlah</label>
-<input type="number">
+            <label>Nama Alat</label>
+            <select>
+                <option>Tenda</option>
+                <option>Carrier</option>
+                <option>Sleeping Bag</option>
+                <option>Kompor</option>
+                <option>Matras</option>
+            </select>
 
-<label>Tanggal Sewa</label>
-<input type="date">
+            <label>Jumlah</label>
+            <input type="number">
 
-<label>Tanggal Kembali</label>
-<input type="date">
+            <label>Tanggal Sewa</label>
+            <input type="date">
 
-<label>Upload Foto KTP</label>
-<input type="file">
+            <label>Tanggal Kembali</label>
+            <input type="date">
 
-<label>Keterangan</label>
-<textarea></textarea>
+            <label>Upload KTP</label>
+            <input type="file">
 
-<button>Simpan</button>
+            <label>Keterangan</label>
+            <textarea></textarea>
 
-</form>
+            <button>Simpan</button>
+
+        </form>
+
+    </section>
+</div>
 
 <footer>
-<p>© 2026 SummitBuddy</p>
+    <div class="footer-section">SummitBuddy</div>
+    <div class="footer-section">Menu</div>
+    <div class="footer-section">Kontak</div>
 </footer>
 
 </body>
