@@ -3,37 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SummitBuddy</title>
+    <title>SummitBuddy - Sewa Alat Pendakian</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <nav>
     <div class="logo">
-        <img src="logo.png">
+        <img src="logo.png" alt="Logo SummitBuddy">
         <span>SummitBuddy</span>
     </div>
-
     <div class="menu">
         <a href="index.html">Home</a>
         <a href="dataalat.html">Data</a>
         <a href="formsewa.html">Sewa</a>
+        <a href="kelolaalat.html">Kelola Alat</a>
     </div>
 </nav>
 
-<header class="hero">
-    <div>
+<header class="hero" style="background-image: url('headergunung.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
         <h1>SummitBuddy</h1>
         <p>Sistem Penyewaan Alat Pendakian</p>
+        <a href="formsewa.html" class="btn-hero">Sewa Sekarang →</a>
     </div>
 </header>
 
 <div class="container">
-
     <section>
-
-      
         <main>
             <h2>Selamat Datang di SummitBuddy</h2>
             <p>
@@ -42,46 +41,29 @@
             </p>
         </main>
 
-        <h2>Alat Populer</h2>
-
-        
+        <h2>⚡ Alat Populer</h2>
         <div class="grid">
-
-            <div class="card">
-                <img src="Tenda.jpg">
-                <p>Tenda</p>
-            </div>
-
-            <div class="card">
-                <img src="Carrier Bag 60L.jpg">
-                <p>Carrier</p>
-            </div>
-
-            <div class="card">
-                <img src="SleepingBag.jpg">
-                <p>Sleeping Bag</p>
-            </div>
-
-            <div class="card">
-                <img src="Kompor.jpg">
-                <p>Kompor</p>
-            </div>
-
-            <div class="card">
-                <img src="Matras.jpg">
-                <p>Matras</p>
-            </div>
-
+            <div class="card"><img src="Tenda.jpg" alt="Tenda" onerror="this.src='https://via.placeholder.com/200?text=Tenda'"><p>Tenda</p><span class="harga">Rp 100.000/hari</span></div>
+            <div class="card"><img src="Carrier Bag 60L.jpg" alt="Carrier" onerror="this.src='https://via.placeholder.com/200?text=Carrier'"><p>Carrier</p><span class="harga">Rp 80.000/hari</span></div>
+            <div class="card"><img src="SleepingBag.jpg" alt="Sleeping Bag" onerror="this.src='https://via.placeholder.com/200?text=Sleeping+Bag'"><p>Sleeping Bag</p><span class="harga">Rp 50.000/hari</span></div>
+            <div class="card"><img src="Kompor.jpg" alt="Kompor" onerror="this.src='https://via.placeholder.com/200?text=Kompor'"><p>Kompor</p><span class="harga">Rp 40.000/hari</span></div>
+            <div class="card"><img src="Matras.jpg" alt="Matras" onerror="this.src='https://via.placeholder.com/200?text=Matras'"><p>Matras</p><span class="harga">Rp 30.000/hari</span></div>
         </div>
 
+        <h2>⭐ Ulasan Pelanggan</h2>
+        <div class="ulasan-grid">
+            <div class="ulasan-card"><div class="rating">★★★★★</div><p class="ulasan-text">"Alat lengkap dan berkualitas! Pelayanannya ramah. Next mau sewa lagi pasti di SummitBuddy."</p><div class="ulasan-user"><strong>- Andi Pratama</strong><span>Mahasiswa, Pendaki Pemula</span></div></div>
+            <div class="ulasan-card"><div class="rating">★★★★★</div><p class="ulasan-text">"Tenda dan carrier dalam kondisi prima. Harga sewa terjangkau. Recommended!"</p><div class="ulasan-user"><strong>- Sari Dewi</strong><span>Pendaki Gunung Rinjani</span></div></div>
+            <div class="ulasan-card"><div class="rating">★★★★☆</div><p class="ulasan-text">"Pelayanan cepat, alat lengkap. Sayang kompor agak kotor, tapi overall oke!"</p><div class="ulasan-user"><strong>- Budi Santoso</strong><span>Anggota Mapala</span></div></div>
+            <div class="ulasan-card"><div class="rating">★★★★★</div><p class="ulasan-text">"Sewa matras dan sleeping bag, bersih dan wangi. Proses sewa gampang. Mantap!"</p><div class="ulasan-user"><strong>- Rina Wahyuni</strong><span>Pendaki Gunung Semeru</span></div></div>
+        </div>
     </section>
-
 </div>
 
 <footer>
-    <div class="footer-section">SummitBuddy</div>
-    <div class="footer-section">Menu</div>
-    <div class="footer-section">Kontak</div>
+    <div class="footer-section"><h4>SummitBuddy</h4><p>Sistem Penyewaan Alat Pendakian</p></div>
+    <div class="footer-section"><h4>Menu</h4><p><a href="index.html">Home</a> | <a href="dataalat.html">Data</a> | <a href="formsewa.html">Sewa</a> | <a href="kelolaalat.html">Kelola Alat</a></p></div>
+    <div class="footer-section"><h4>Kontak</h4><p>Email: info@summitbuddy.com</p><p>Telp: 0812-3456-7890</p></div>
 </footer>
 
 </body>

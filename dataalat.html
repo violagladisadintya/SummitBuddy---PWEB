@@ -1,126 +1,159 @@
-la<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Alat</title>
+    <title>SummitBuddy - Data Alat Pendakian</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <nav>
     <div class="logo">
-        <img src="logo.png">
+        <img src="logo.png" alt="Logo SummitBuddy">
         <span>SummitBuddy</span>
     </div>
-
     <div class="menu">
         <a href="index.html">Home</a>
         <a href="dataalat.html">Data</a>
         <a href="formsewa.html">Sewa</a>
+        <a href="kelolaalat.html">Kelola Alat</a>
     </div>
 </nav>
 
-<header class="hero">
-    <h1>Data Alat Pendakian</h1>
+<header class="hero-small" style="background-image: url('headersewa.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Data Alat Pendakian</h1>
+        <p>Lengkapi persiapan pendakianmu dengan alat terbaik</p>
+    </div>
 </header>
 
 <div class="container">
- 
     <aside>
-        <h3>Filter</h3>
-        <label><input type="checkbox"> Tenda</label>
-        <label><input type="checkbox"> Carrier</label>
-        <label><input type="checkbox"> Sleeping Bag</label>
-        <label><input type="checkbox"> Kompor</label>
-        <label><input type="checkbox"> Matras</label>
+        <h3>Filter Kategori</h3>
+        <label><input type="checkbox" value="Tenda" class="filter-cb"> Tenda</label>
+        <label><input type="checkbox" value="Carrier" class="filter-cb"> Carrier</label>
+        <label><input type="checkbox" value="Sleeping" class="filter-cb"> Sleeping Bag</label>
+        <label><input type="checkbox" value="Kompor" class="filter-cb"> Kompor</label>
+        <label><input type="checkbox" value="Aksesoris" class="filter-cb"> Aksesoris</label>
 
-        <h3>Statistik</h3>
-        <p>Total : 33</p>
-        <p>Tersedia : 25</p>
-        <p>Dipinjam : 8</p>
+        <h3>📊 Statistik</h3>
+        <div class="stat-item"><span>Total Alat</span><span class="stat-value" id="statTotalAlatData">0</span></div>
+        <div class="stat-item"><span>Tersedia</span><span class="stat-value" id="statTersediaData">0</span></div>
+        <div class="stat-item"><span>Dipinjam</span><span class="stat-value" id="statDipinjamData">0</span></div>
     </aside>
 
     <section>
-
         <div class="search-box">
-            <input type="text" placeholder="Cari alat...">
-            <button>Cari</button>
+            <input type="text" id="searchInput" placeholder="Cari alat...">
+            <button id="searchBtn">🔍 Cari</button>
         </div>
 
         <h2>Daftar Alat</h2>
-
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Kode</th>
-                    <th>Nama Alat</th>
-                    <th>Foto</th>
-                    <th>Kategori</th>
-                    <th>Jumlah</th>
-                    <th>Harga Sewa</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>A001</td>
-                    <td>Tenda Dome</td>
-                    <td><img src="Tenda.jpg"></td>
-                    <td>Tenda</td>
-                    <td>10</td>
-                    <td>100000</td>
-                </tr>
-
-                <tr>
-                    <td>A002</td>
-                    <td>Carrier 60L</td>
-                    <td><img src="Carrier Bag 60L.jpg"></td>
-                    <td>Carrier</td>
-                    <td>8</td>
-                    <td>80000</td>
-                </tr>
-
-                <tr>
-                    <td>A003</td>
-                    <td>Sleeping Bag</td>
-                    <td><img src="SleepingBag.jpg"></td>
-                    <td>Sleeping</td>
-                    <td>7</td>
-                    <td>50000</td>
-                </tr>
-
-                <tr>
-                    <td>A004</td>
-                    <td>Kompor Portable</td>
-                    <td><img src="Kompor.jpg"></td>
-                    <td>Kompor</td>
-                    <td>5</td>
-                    <td>40000</td>
-                </tr>
-
-                <tr>
-                    <td>A005</td>
-                    <td>Matras</td>
-                    <td><img src="Matras.jpg"></td>
-                    <td>Aksesoris</td>
-                    <td>3</td>
-                    <td>30000</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="table-container">
+            <table id="alatTable">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama Alat</th>
+                        <th>Foto</th>
+                        <th>Kategori</th>
+                        <th>Jumlah</th>
+                        <th>Harga Sewa/Hari</th>
+                    </tr>
+                </thead>
+                <tbody id="alatBody">
+                    <!-- Data akan diisi JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </section>
-
 </div>
 
 <footer>
-    <div class="footer-section">SummitBuddy</div>
-    <div class="footer-section">Menu</div>
-    <div class="footer-section">Kontak</div>
+    <div class="footer-section"><h4>SummitBuddy</h4><p>Sistem Penyewaan Alat Pendakian</p></div>
+    <div class="footer-section"><h4>Menu</h4><p><a href="index.html">Home</a> | <a href="dataalat.html">Data</a> | <a href="formsewa.html">Sewa</a> | <a href="kelolaalat.html">Kelola Alat</a></p></div>
+    <div class="footer-section"><h4>Kontak</h4><p>Email: info@summitbuddy.com</p><p>Telp: 0812-3456-7890</p></div>
 </footer>
+
+<script>
+    // ============================================
+    // DATA ALAT LANGSUNG DI SINI (TIDAK PAKAI LOCALSTORAGE DULU)
+    // ============================================
+    
+    const daftarAlat = [
+        { kode: "A001", nama: "Tenda Dome", kategori: "Tenda", stok: 10, harga: 100000, foto: "Tenda.jpg" },
+        { kode: "A002", nama: "Carrier 60L", kategori: "Carrier", stok: 8, harga: 80000, foto: "Carrier Bag 60L.jpg" },
+        { kode: "A003", nama: "Sleeping Bag", kategori: "Sleeping", stok: 7, harga: 50000, foto: "SleepingBag.jpg" },
+        { kode: "A004", nama: "Kompor Portable", kategori: "Kompor", stok: 5, harga: 40000, foto: "Kompor.jpg" },
+        { kode: "A005", nama: "Matras", kategori: "Aksesoris", stok: 3, harga: 30000, foto: "Matras.jpg" },
+        { kode: "A006", nama: "Headlamp", kategori: "Aksesoris", stok: 12, harga: 25000, foto: "headlamp.jpg" },
+        { kode: "A007", nama: "Carrier 80L", kategori: "Carrier", stok: 4, harga: 100000, foto: "Carrier Bag 60L.jpg" },
+        { kode: "A008", nama: "Tenda 4 Season", kategori: "Tenda", stok: 2, harga: 150000, foto: "Tenda.jpg" }
+    ];
+
+    function formatRupiah(angka) {
+        return 'Rp ' + angka.toLocaleString('id-ID');
+    }
+
+    function renderTabelAlat() {
+        const tbody = document.getElementById('alatBody');
+        if (!tbody) return;
+        
+        const searchKeyword = document.getElementById('searchInput')?.value.toLowerCase() || '';
+        const checkboxes = document.querySelectorAll('.filter-cb');
+        const selectedCategories = [];
+        checkboxes.forEach(cb => { if (cb.checked) selectedCategories.push(cb.value); });
+        
+        let dataFiltered = daftarAlat.filter(alat => {
+            const matchSearch = searchKeyword === '' || 
+                alat.kode.toLowerCase().includes(searchKeyword) || 
+                alat.nama.toLowerCase().includes(searchKeyword);
+            const matchKategori = selectedCategories.length === 0 || selectedCategories.includes(alat.kategori);
+            return matchSearch && matchKategori;
+        });
+        
+        if (dataFiltered.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">Tidak ada data alat</td></tr>';
+        } else {
+            tbody.innerHTML = dataFiltered.map(alat => `
+                <tr>
+                    <td>${alat.kode}</td>
+                    <td>${alat.nama}</td>
+                    <td><img src="${alat.foto}" alt="${alat.nama}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;" onerror="this.src='https://via.placeholder.com/50?text=${alat.nama}'"></td>
+                    <td>${alat.kategori}</td>
+                    <td>${alat.stok}</td>
+                    <td>${formatRupiah(alat.harga)}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update statistik
+        const totalItem = daftarAlat.reduce((sum, alat) => sum + alat.stok, 0);
+        const tersedia = daftarAlat.reduce((sum, alat) => sum + alat.stok, 0);
+        const dipinjam = 0;
+        
+        document.getElementById('statTotalAlatData').textContent = totalItem;
+        document.getElementById('statTersediaData').textContent = tersedia;
+        document.getElementById('statDipinjamData').textContent = dipinjam;
+    }
+
+    // Event listener
+    document.addEventListener('DOMContentLoaded', function() {
+        renderTabelAlat();
+        
+        document.querySelectorAll('.filter-cb').forEach(cb => {
+            cb.addEventListener('change', renderTabelAlat);
+        });
+        
+        document.getElementById('searchBtn')?.addEventListener('click', renderTabelAlat);
+        document.getElementById('searchInput')?.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') renderTabelAlat();
+        });
+    });
+</script>
 
 </body>
 </html>

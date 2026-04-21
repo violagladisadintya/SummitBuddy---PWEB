@@ -3,76 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Sewa</title>
+    <title>SummitBuddy - Form Penyewaan</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .total-harga { margin: 15px 0; padding: 12px; background: linear-gradient(135deg, #e8f4f8 0%, #d1e8f0 100%); border-radius: 8px; font-weight: bold; text-align: center; font-size: 18px; color: #1a5d7a; }
+        .info-harga { font-size: 12px; color: #666; margin-top: 5px; text-align: center; }
+        form { max-width: 600px; margin: 0 auto; }
+        button { width: 100%; padding: 12px; font-size: 16px; font-weight: bold; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+        .checkbox-group label { display: flex; align-items: center; gap: 8px; font-weight: normal; margin: 0; cursor: pointer; }
+        .checkbox-group input[type="checkbox"] { width: auto; margin: 0; transform: scale(1.1); cursor: pointer; }
+    </style>
 </head>
-
 <body>
 
 <nav>
     <div class="logo">
-        <img src="logo.png">
+        <img src="logo.png" alt="Logo SummitBuddy">
         <span>SummitBuddy</span>
     </div>
-
     <div class="menu">
         <a href="index.html">Home</a>
         <a href="dataalat.html">Data</a>
         <a href="formsewa.html">Sewa</a>
+        <a href="kelolaalat.html">Kelola Alat</a>
     </div>
 </nav>
 
-<header class="hero">
-    <h1>Form Penyewaan</h1>
+<header class="hero-small" style="background-image: url('headersewa.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Form Penyewaan Alat</h1>
+        <p>Isi data dengan lengkap untuk menyewa alat</p>
+    </div>
 </header>
 
 <div class="container">
     <section>
+        <form id="sewaForm">
+            <label for="nama">Nama Penyewa *</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
 
-        <form>
+            <label for="noHp">No HP *</label>
+            <input type="tel" id="noHp" name="noHp" placeholder="08xx-xxxx-xxxx" required>
 
-            <label>Nama Penyewa</label>
-            <input type="text">
-
-            <label>No HP</label>
-            <input type="text">
-
-            <label>Nama Alat</label>
-            <select>
-                <option>Tenda</option>
-                <option>Carrier</option>
-                <option>Sleeping Bag</option>
-                <option>Kompor</option>
-                <option>Matras</option>
+            <label for="alat">Nama Alat *</label>
+            <select id="alat" name="alat" required>
+                <option value="Tenda">Tenda - Rp 100.000/hari</option>
+                <option value="Carrier">Carrier - Rp 80.000/hari</option>
+                <option value="Sleeping Bag">Sleeping Bag - Rp 50.000/hari</option>
+                <option value="Kompor">Kompor - Rp 40.000/hari</option>
+                <option value="Matras">Matras - Rp 30.000/hari</option>
             </select>
 
-            <label>Jumlah</label>
-            <input type="number">
+            <label for="jumlah">Jumlah *</label>
+            <input type="number" id="jumlah" name="jumlah" min="1" value="1" required>
 
-            <label>Tanggal Sewa</label>
-            <input type="date">
+            <label for="tglSewa">Tanggal Sewa *</label>
+            <input type="date" id="tglSewa" name="tglSewa" required>
 
-            <label>Tanggal Kembali</label>
-            <input type="date">
+            <label for="tglKembali">Tanggal Kembali *</label>
+            <input type="date" id="tglKembali" name="tglKembali" required>
 
-            <label>Upload KTP</label>
-            <input type="file">
+            <label for="ktp">Upload KTP *</label>
+            <input type="file" id="ktp" name="ktp" accept="image/*,application/pdf" required>
 
-            <label>Keterangan</label>
-            <textarea></textarea>
+            <label>Fitur Tambahan (Opsional):</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="tracking"> Tracking GPS</label>
+                <label><input type="checkbox" value="asuransi"> Asuransi Perjalanan</label>
+                <label><input type="checkbox" value="guide"> Jasa Guide</label>
+                <label><input type="checkbox" value="logistik"> Paket Logistik</label>
+            </div>
 
-            <button>Simpan</button>
+            <label for="keterangan">Keterangan</label>
+            <textarea id="keterangan" name="keterangan" rows="3" placeholder="Catatan tambahan (opsional)"></textarea>
 
+            <div id="totalHarga" class="total-harga">💰 Total: Rp 0</div>
+            <div class="info-harga">* Harga dihitung berdasarkan jumlah alat × harga per hari × lama sewa</div>
+
+            <button type="submit">Sewa Sekarang</button>
         </form>
-
     </section>
 </div>
 
 <footer>
-    <div class="footer-section">SummitBuddy</div>
-    <div class="footer-section">Menu</div>
-    <div class="footer-section">Kontak</div>
+    <div class="footer-section"><h4>SummitBuddy</h4><p>Sistem Penyewaan Alat Pendakian</p></div>
+    <div class="footer-section"><h4>Menu</h4><p><a href="index.html">Home</a> | <a href="dataalat.html">Data</a> | <a href="formsewa.html">Sewa</a> | <a href="kelolaalat.html">Kelola Alat</a></p></div>
+    <div class="footer-section"><h4>Kontak</h4><p>Email: info@summitbuddy.com</p><p>Telp: 0812-3456-7890</p></div>
 </footer>
+
+<script>
+    const hargaAlat = {
+        "Tenda": 100000,
+        "Carrier": 80000,
+        "Sleeping Bag": 50000,
+        "Kompor": 40000,
+        "Matras": 30000
+    };
+
+    function formatRupiah(angka) {
+        return 'Rp ' + angka.toLocaleString('id-ID');
+    }
+
+    function hitungTotalHarga(alat, jumlah, tglSewa, tglKembali) {
+        if (!alat || !jumlah || !tglSewa || !tglKembali) return 0;
+        let hargaPerHari = hargaAlat[alat] || 0;
+        let date1 = new Date(tglSewa);
+        let date2 = new Date(tglKembali);
+        if (date2 <= date1) return 0;
+        let selisihHari = Math.ceil((date2 - date1) / (1000 * 60 * 60 * 24));
+        return jumlah * hargaPerHari * selisihHari;
+    }
+
+    function simpanPenyewaan(data) {
+        let daftarSewa = JSON.parse(localStorage.getItem('summitbuddy_sewa')) || [];
+        daftarSewa.push(data);
+        localStorage.setItem('summitbuddy_sewa', JSON.stringify(daftarSewa));
+        return true;
+    }
+
+    function updateTotalHargaForm() {
+        let alatSelect = document.getElementById('alat');
+        let jumlah = parseInt(document.getElementById('jumlah')?.value) || 0;
+        let tglSewa = document.getElementById('tglSewa')?.value || '';
+        let tglKembali = document.getElementById('tglKembali')?.value || '';
+        let alat = alatSelect ? alatSelect.options[alatSelect.selectedIndex]?.text.split(' - ')[0] : '';
+        let total = hitungTotalHarga(alat, jumlah, tglSewa, tglKembali);
+        let totalDiv = document.getElementById('totalHarga');
+        if (totalDiv) totalDiv.innerHTML = total > 0 ? `💰 Total: ${formatRupiah(total)}` : `💰 Total: Rp 0`;
+    }
+
+    function validasiFormSewa() {
+        let nama = document.getElementById('nama')?.value.trim() || '';
+        let noHp = document.getElementById('noHp')?.value.trim() || '';
+        let jumlah = document.getElementById('jumlah')?.value || 0;
+        let ktp = document.getElementById('ktp')?.value || '';
+        let tglSewa = document.getElementById('tglSewa')?.value || '';
+        let tglKembali = document.getElementById('tglKembali')?.value || '';
+        let errors = [];
+        if (!nama) errors.push('Nama penyewa wajib diisi');
+        if (!noHp) errors.push('Nomor HP wajib diisi');
+        if (noHp.length < 10) errors.push('Nomor HP minimal 10 digit');
+        if (!jumlah || jumlah <= 0) errors.push('Jumlah alat minimal 1');
+        if (!ktp) errors.push('Upload KTP wajib dilampirkan');
+        if (!tglSewa) errors.push('Tanggal sewa wajib diisi');
+        if (!tglKembali) errors.push('Tanggal kembali wajib diisi');
+        if (tglSewa && tglKembali) {
+            let date1 = new Date(tglSewa);
+            let date2 = new Date(tglKembali);
+            if (date2 <= date1) errors.push('Tanggal kembali harus setelah tanggal sewa');
+        }
+        return errors;
+    }
+
+    function tampilkanNotifikasi(pesan, jenis = 'success') {
+        let notif = document.createElement('div');
+        notif.textContent = pesan;
+        notif.style.cssText = `position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; border-radius: 8px; color: white; z-index: 9999; background-color: ${jenis === 'success' ? '#43a047' : '#e53935'}; animation: slideIn 0.4s ease forwards;`;
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let style = document.createElement('style');
+        style.textContent = `@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`;
+        document.head.appendChild(style);
+
+        let form = document.getElementById('sewaForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let errors = validasiFormSewa();
+                if (errors.length > 0) { 
+                    tampilkanNotifikasi(errors[0], 'error'); 
+                    return; 
+                }
+                let alatSelect = document.getElementById('alat');
+                let alat = alatSelect.options[alatSelect.selectedIndex]?.text.split(' - ')[0];
+                let tglSewa = document.getElementById('tglSewa').value;
+                let tglKembali = document.getElementById('tglKembali').value;
+                let jumlah = parseInt(document.getElementById('jumlah').value);
+                let total = hitungTotalHarga(alat, jumlah, tglSewa, tglKembali);
+                let dataSewa = { 
+                    id: Date.now(), 
+                    nama: document.getElementById('nama').value.trim(), 
+                    noHp: document.getElementById('noHp').value.trim(), 
+                    alat: alat, 
+                    jumlah: jumlah, 
+                    tglSewa: tglSewa, 
+                    tglKembali: tglKembali, 
+                    totalHarga: total, 
+                    keterangan: document.getElementById('keterangan').value 
+                };
+                simpanPenyewaan(dataSewa);
+                alert(`✅ Penyewaan Berhasil!\n\nNama: ${dataSewa.nama}\nAlat: ${dataSewa.alat}\nJumlah: ${dataSewa.jumlah}\nTotal: ${formatRupiah(total)}\n\nTerima kasih telah menyewa di SummitBuddy!`);
+                form.reset();
+                document.getElementById('jumlah').value = '1';
+                updateTotalHargaForm();
+                tampilkanNotifikasi('Data penyewaan berhasil disimpan!', 'success');
+            });
+            
+            ['alat', 'jumlah', 'tglSewa', 'tglKembali'].forEach(id => {
+                let el = document.getElementById(id);
+                if (el) el.addEventListener('input', updateTotalHargaForm);
+            });
+            updateTotalHargaForm();
+        }
+    });
+</script>
 
 </body>
 </html>
