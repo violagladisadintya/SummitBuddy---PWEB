@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Alat - SummitBuddy')
+@section('title', 'Kelola Alat & Penyewaan - SummitBuddy')
 
 @section('hero')
-<div class="hero-small">
-    <h1>Admin Panel</h1>
-    <p>Kelola Alat & Lihat Daftar Penyewaan</p>
-</div>
+<header class="hero-small">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Admin Panel</h1>
+        <p>Kelola Alat & Lihat Daftar Penyewaan</p>
+    </div>
+</header>
 @endsection
 
 @section('content')
@@ -17,33 +20,21 @@
 
 <div id="tab-alat" class="tab-content active">
     <div class="stat-row">
-        <div class="stat-card"><h4>📦 Total Alat</h4><div class="angka" id="statTotalAlat">8</div></div>
-        <div class="stat-card"><h4>📊 Total Stok</h4><div class="angka" id="statTotalStok">51</div></div>
-        <div class="stat-card"><h4>💰 Total Nilai</h4><div class="angka" id="statTotalNilai">Rp 3.750.000</div></div>
-        <div class="stat-card"><h4>⚠️ Stok Menipis</h4><div class="angka" id="statStokMenipis">3</div></div>
-        <div class="stat-card"><h4>📋 Total Sewa</h4><div class="angka" id="statTotalSewa">4</div></div>
+        <div class="stat-card"><h4>📦 Total Alat</h4><div class="angka" id="statTotalAlat">{{ $statistik['totalAlat'] }}</div></div>
+        <div class="stat-card"><h4>📦 Total Stok</h4><div class="angka" id="statTotalStok">{{ $statistik['totalStok'] }}</div></div>
+        <div class="stat-card"><h4>💰 Total Nilai</h4><div class="angka" id="statTotalNilai">Rp {{ number_format($statistik['totalNilai'], 0, ',', '.') }}</div></div>
+        <div class="stat-card"><h4>⚠️ Stok Menipis</h4><div class="angka" id="statStokMenipis">{{ $statistik['stokMenipis'] }}</div></div>
+        <div class="stat-card"><h4>📋 Total Sewa</h4><div class="angka" id="statTotalSewa">{{ $statistik['totalSewa'] }}</div></div>
     </div>
 
     <button class="btn-tambah" onclick="openTambahModal()">+ Tambah Alat Baru</button>
 
     <div class="table-container">
-        <table>
+        <table id="alatTable">
             <thead>
                 <tr><th>Kode</th><th>Nama</th><th>Kategori</th><th>Stok</th><th>Harga</th><th>Aksi</th></tr>
             </thead>
             <tbody id="alatBody">
-                @php
-                $daftarAlat = [
-                    ['id' => 1, 'kode' => 'A001', 'nama' => 'Tenda Dome', 'kategori' => 'Tenda', 'stok' => 10, 'harga' => 100000],
-                    ['id' => 2, 'kode' => 'A002', 'nama' => 'Carrier 60L', 'kategori' => 'Carrier', 'stok' => 8, 'harga' => 80000],
-                    ['id' => 3, 'kode' => 'A003', 'nama' => 'Sleeping Bag', 'kategori' => 'Sleeping', 'stok' => 7, 'harga' => 50000],
-                    ['id' => 4, 'kode' => 'A004', 'nama' => 'Kompor Portable', 'kategori' => 'Kompor', 'stok' => 5, 'harga' => 40000],
-                    ['id' => 5, 'kode' => 'A005', 'nama' => 'Matras', 'kategori' => 'Aksesoris', 'stok' => 3, 'harga' => 30000],
-                    ['id' => 6, 'kode' => 'A006', 'nama' => 'Headlamp', 'kategori' => 'Aksesoris', 'stok' => 12, 'harga' => 25000],
-                    ['id' => 7, 'kode' => 'A007', 'nama' => 'Carrier 80L', 'kategori' => 'Carrier', 'stok' => 4, 'harga' => 100000],
-                    ['id' => 8, 'kode' => 'A008', 'nama' => 'Tenda 4 Season', 'kategori' => 'Tenda', 'stok' => 2, 'harga' => 150000],
-                ];
-                @endphp
                 @foreach($daftarAlat as $alat)
                 <tr id="row-{{ $alat['id'] }}" style="{{ $alat['stok'] < 5 ? 'background-color:#fff3cd' : '' }}">
                     <td>{{ $alat['kode'] }}</td>
@@ -64,19 +55,11 @@
 
 <div id="tab-sewa" class="tab-content">
     <div class="table-container">
-        <table>
+        <table id="sewaTable">
             <thead>
                 <tr><th>No</th><th>Nama</th><th>No HP</th><th>Alat</th><th>Jumlah</th><th>Tgl Sewa</th><th>Tgl Kembali</th><th>Total</th><th>Aksi</th></tr>
             </thead>
             <tbody id="sewaBody">
-                @php
-                $daftarSewa = [
-                    ['id' => 101, 'nama' => 'Andi Pratama', 'noHp' => '08123456789', 'alat' => 'Tenda', 'jumlah' => 2, 'tglSewa' => '2024-12-10', 'tglKembali' => '2024-12-12', 'totalHarga' => 200000],
-                    ['id' => 102, 'nama' => 'Sari Dewi', 'noHp' => '08198765432', 'alat' => 'Carrier', 'jumlah' => 1, 'tglSewa' => '2024-12-15', 'tglKembali' => '2024-12-17', 'totalHarga' => 160000],
-                    ['id' => 103, 'nama' => 'Budi Santoso', 'noHp' => '08155555555', 'alat' => 'Sleeping Bag', 'jumlah' => 3, 'tglSewa' => '2024-12-20', 'tglKembali' => '2024-12-22', 'totalHarga' => 150000],
-                    ['id' => 104, 'nama' => 'Rina Wahyuni', 'noHp' => '08144444444', 'alat' => 'Kompor', 'jumlah' => 1, 'tglSewa' => '2024-12-25', 'tglKembali' => '2024-12-26', 'totalHarga' => 40000],
-                ];
-                @endphp
                 @foreach($daftarSewa as $index => $sewa)
                 <tr id="sewa-row-{{ $sewa['id'] }}">
                     <td>{{ $index + 1 }}</td>
@@ -95,20 +78,22 @@
     </div>
 </div>
 
-<div id="modalAlat" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
+<div id="modalAlat" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h3 id="modalTitle">Tambah Alat Baru</h3>
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span onclick="closeModal()" style="font-size: 28px; cursor: pointer; color: #999;">&times;</span>
         </div>
         <form id="formAlat" onsubmit="return false;">
             <input type="hidden" id="editId">
-            <label>Kode Alat *</label>
-            <input type="text" id="kodeAlat" required>
-            <label>Nama Alat *</label>
-            <input type="text" id="namaAlat" required>
-            <label>Kategori *</label>
-            <select id="kategoriAlat" required>
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Kode Alat *</label>
+            <input type="text" id="kodeAlat" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Nama Alat *</label>
+            <input type="text" id="namaAlat" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Kategori *</label>
+            <select id="kategoriAlat" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
                 <option value="">Pilih Kategori</option>
                 <option value="Tenda">Tenda</option>
                 <option value="Carrier">Carrier</option>
@@ -116,194 +101,228 @@
                 <option value="Kompor">Kompor</option>
                 <option value="Aksesoris">Aksesoris</option>
             </select>
-            <label>Stok *</label>
-            <input type="number" id="stokAlat" min="0" value="0" required>
-            <label>Harga/Hari (Rp) *</label>
-            <input type="number" id="hargaAlat" min="0" value="0" required>
-            <label>Tanggal Masuk *</label>
-            <input type="date" id="tglMasuk" required>
-            <button type="button" onclick="simpanAlat()" style="margin-top:20px;">Simpan Alat</button>
+
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Stok *</label>
+            <input type="number" id="stokAlat" min="0" value="0" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Harga/Hari (Rp) *</label>
+            <input type="number" id="hargaAlat" min="0" value="0" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+
+            <label style="display: block; margin: 15px 0 5px; font-weight: 600;">Tanggal Masuk *</label>
+            <input type="date" id="tglMasuk" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+
+            <button type="button" onclick="simpanAlat()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #ff8c42, #e67e22); color: white; border: none; border-radius: 50px; font-weight: bold; margin-top: 20px; cursor: pointer;">Simpan Alat</button>
         </form>
     </div>
 </div>
 
 @push('scripts')
 <script>
-let daftarAlat = @json($daftarAlat);
-let daftarSewa = @json($daftarSewa);
+    let daftarAlat = @json($daftarAlat);
+    let daftarSewa = @json($daftarSewa);
 
-function formatRupiah(angka) {
-    return 'Rp ' + angka.toLocaleString('id-ID');
-}
-
-function saveToLocalStorage() {
-    localStorage.setItem('summitbuddy_alat', JSON.stringify(daftarAlat));
-    localStorage.setItem('summitbuddy_sewa', JSON.stringify(daftarSewa));
-}
-
-function loadFromLocalStorage() {
-    const alat = localStorage.getItem('summitbuddy_alat');
-    const sewa = localStorage.getItem('summitbuddy_sewa');
-    if (alat) daftarAlat = JSON.parse(alat);
-    if (sewa) daftarSewa = JSON.parse(sewa);
-}
-
-function renderTabelAlat() {
-    const tbody = document.getElementById('alatBody');
-    if (!tbody) return;
-    if (daftarAlat.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">Tidak ada data alat</td></tr>';
-    } else {
-        tbody.innerHTML = daftarAlat.map(alat => `
-            <tr id="row-${alat.id}" style="${alat.stok < 5 ? 'background-color:#fff3cd' : ''}">
-                <td>${alat.kode}</td>
-                <td>${alat.nama}</td>
-                <td>${alat.kategori}</td>
-                <td class="stok-${alat.id}">${alat.stok}</td>
-                <td>Rp ${alat.harga.toLocaleString('id-ID')}</td>
-                <td>
-                    <button class="btn-edit" onclick="editAlat(${alat.id})">✏️ Edit</button>
-                    <button class="btn-hapus" onclick="hapusAlat(${alat.id})">🗑️ Hapus</button>
-                </td>
-            </tr>
-        `).join('');
+    function formatRupiah(angka) {
+        return 'Rp ' + angka.toLocaleString('id-ID');
     }
-    const totalAlat = daftarAlat.length;
-    const totalStok = daftarAlat.reduce((sum, a) => sum + a.stok, 0);
-    const totalNilai = daftarAlat.reduce((sum, a) => sum + (a.stok * a.harga), 0);
-    const stokMenipis = daftarAlat.filter(a => a.stok < 5).length;
-    document.getElementById('statTotalAlat').innerHTML = totalAlat;
-    document.getElementById('statTotalStok').innerHTML = totalStok;
-    document.getElementById('statTotalNilai').innerHTML = formatRupiah(totalNilai);
-    document.getElementById('statStokMenipis').innerHTML = stokMenipis;
-}
 
-function renderTabelSewa() {
-    const tbody = document.getElementById('sewaBody');
-    if (!tbody) return;
-    if (daftarSewa.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center">Belum ada penyewaan</td></tr>';
-    } else {
-        tbody.innerHTML = daftarSewa.map((sewa, i) => `
-            <tr id="sewa-row-${sewa.id}">
-                <td>${i + 1}</td>
-                <td>${sewa.nama}</td>
-                <td>${sewa.noHp}</td>
-                <td>${sewa.alat}</td>
-                <td>${sewa.jumlah}</td>
-                <td>${sewa.tglSewa}</td>
-                <td>${sewa.tglKembali}</td>
-                <td>Rp ${sewa.totalHarga.toLocaleString('id-ID')}</td>
-                <td><button class="btn-hapus" onclick="hapusSewa(${sewa.id})">🗑️ Hapus</button></td>
-            </tr>
-        `).join('');
+    function saveToLocalStorage() {
+        localStorage.setItem('summitbuddy_alat', JSON.stringify(daftarAlat));
+        localStorage.setItem('summitbuddy_sewa', JSON.stringify(daftarSewa));
     }
-    document.getElementById('statTotalSewa').innerHTML = daftarSewa.length;
-}
 
-function openTambahModal() {
-    document.getElementById('editId').value = '';
-    document.getElementById('kodeAlat').value = '';
-    document.getElementById('namaAlat').value = '';
-    document.getElementById('kategoriAlat').value = '';
-    document.getElementById('stokAlat').value = '0';
-    document.getElementById('hargaAlat').value = '';
-    document.getElementById('tglMasuk').value = new Date().toISOString().split('T')[0];
-    document.getElementById('modalTitle').innerHTML = 'Tambah Alat Baru';
-    document.getElementById('modalAlat').classList.add('active');
-}
+    function loadFromLocalStorage() {
+        const alat = localStorage.getItem('summitbuddy_alat');
+        const sewa = localStorage.getItem('summitbuddy_sewa');
+        if (alat) daftarAlat = JSON.parse(alat);
+        if (sewa) daftarSewa = JSON.parse(sewa);
+    }
 
-function editAlat(id) {
-    const alat = daftarAlat.find(a => a.id === id);
-    if (!alat) return;
-    document.getElementById('editId').value = alat.id;
-    document.getElementById('kodeAlat').value = alat.kode;
-    document.getElementById('namaAlat').value = alat.nama;
-    document.getElementById('kategoriAlat').value = alat.kategori;
-    document.getElementById('stokAlat').value = alat.stok;
-    document.getElementById('hargaAlat').value = alat.harga;
-    document.getElementById('tglMasuk').value = alat.tglMasuk;
-    document.getElementById('modalTitle').innerHTML = 'Edit Alat';
-    document.getElementById('modalAlat').classList.add('active');
-}
+    function renderTabelAlat() {
+        const tbody = document.getElementById('alatBody');
+        if (!tbody) return;
 
-function closeModal() {
-    document.getElementById('modalAlat').classList.remove('active');
-}
+        if (daftarAlat.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">Tidak ada data alat</td></tr>';
+        } else {
+            tbody.innerHTML = daftarAlat.map(alat => `
+                <tr id="row-${alat.id}" style="${alat.stok < 5 ? 'background-color:#fff3cd' : ''}">
+                    <td>${alat.kode}</td>
+                    <td>${alat.nama}</td>
+                    <td>${alat.kategori}</td>
+                    <td class="stok-${alat.id}">${alat.stok}</td>
+                    <td>Rp ${alat.harga.toLocaleString('id-ID')}</td>
+                    <td>
+                        <button class="btn-edit" onclick="editAlat(${alat.id})">✏️ Edit</button>
+                        <button class="btn-hapus" onclick="hapusAlat(${alat.id})">🗑️ Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
 
-function simpanAlat() {
-    const editId = document.getElementById('editId').value;
-    const kode = document.getElementById('kodeAlat').value.trim();
-    const nama = document.getElementById('namaAlat').value.trim();
-    const kategori = document.getElementById('kategoriAlat').value;
-    const stok = parseInt(document.getElementById('stokAlat').value);
-    const harga = parseInt(document.getElementById('hargaAlat').value);
-    const tglMasuk = document.getElementById('tglMasuk').value;
-    if (!kode || !nama || !kategori || !tglMasuk) { alert('Semua field wajib diisi!'); return; }
-    if (stok < 0 || harga < 0) { alert('Stok dan harga tidak boleh negatif!'); return; }
-    const kodeExists = daftarAlat.some(a => a.kode === kode && a.id != editId);
-    if (kodeExists) { alert('Kode alat sudah digunakan!'); return; }
-    if (editId) {
-        const index = daftarAlat.findIndex(a => a.id == editId);
-        if (index !== -1) { daftarAlat[index] = { ...daftarAlat[index], kode, nama, kategori, stok, harga, tglMasuk }; saveToLocalStorage(); alert('✅ Alat berhasil diupdate!'); }
-    } else {
-        const newId = Date.now();
-        daftarAlat.push({ id: newId, kode, nama, kategori, stok, harga, tglMasuk });
+        const totalAlat = daftarAlat.length;
+        const totalStok = daftarAlat.reduce((sum, a) => sum + a.stok, 0);
+        const totalNilai = daftarAlat.reduce((sum, a) => sum + (a.stok * a.harga), 0);
+        const stokMenipis = daftarAlat.filter(a => a.stok < 5).length;
+        const totalSewa = daftarSewa.length;
+
+        document.getElementById('statTotalAlat').innerHTML = totalAlat;
+        document.getElementById('statTotalStok').innerHTML = totalStok;
+        document.getElementById('statTotalNilai').innerHTML = formatRupiah(totalNilai);
+        document.getElementById('statStokMenipis').innerHTML = stokMenipis;
+        document.getElementById('statTotalSewa').innerHTML = totalSewa;
+    }
+
+    function renderTabelSewa() {
+        const tbody = document.getElementById('sewaBody');
+        if (!tbody) return;
+
+        if (daftarSewa.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align:center">Belum ada penyewaan</td></tr>';
+        } else {
+            tbody.innerHTML = daftarSewa.map((sewa, i) => `
+                <tr id="sewa-row-${sewa.id}">
+                    <td>${i + 1}</td>
+                    <td>${sewa.nama}</td>
+                    <td>${sewa.noHp}</td>
+                    <td>${sewa.alat}</td>
+                    <td>${sewa.jumlah}</td>
+                    <td>${sewa.tglSewa}</td>
+                    <td>${sewa.tglKembali}</td>
+                    <td>Rp ${sewa.totalHarga.toLocaleString('id-ID')}</td>
+                    <td><button class="btn-hapus" onclick="hapusSewa(${sewa.id})">🗑️ Hapus</button></td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    function openTambahModal() {
+        document.getElementById('editId').value = '';
+        document.getElementById('kodeAlat').value = '';
+        document.getElementById('namaAlat').value = '';
+        document.getElementById('kategoriAlat').value = '';
+        document.getElementById('stokAlat').value = '0';
+        document.getElementById('hargaAlat').value = '';
+        document.getElementById('tglMasuk').value = new Date().toISOString().split('T')[0];
+        document.getElementById('modalTitle').innerHTML = 'Tambah Alat Baru';
+        document.getElementById('modalAlat').style.display = 'flex';
+    }
+
+    function editAlat(id) {
+        const alat = daftarAlat.find(a => a.id === id);
+        if (!alat) return;
+
+        document.getElementById('editId').value = alat.id;
+        document.getElementById('kodeAlat').value = alat.kode;
+        document.getElementById('namaAlat').value = alat.nama;
+        document.getElementById('kategoriAlat').value = alat.kategori;
+        document.getElementById('stokAlat').value = alat.stok;
+        document.getElementById('hargaAlat').value = alat.harga;
+        document.getElementById('tglMasuk').value = alat.tglMasuk;
+        document.getElementById('modalTitle').innerHTML = 'Edit Alat';
+        document.getElementById('modalAlat').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('modalAlat').style.display = 'none';
+    }
+
+    function simpanAlat() {
+        const editId = document.getElementById('editId').value;
+        const kode = document.getElementById('kodeAlat').value.trim();
+        const nama = document.getElementById('namaAlat').value.trim();
+        const kategori = document.getElementById('kategoriAlat').value;
+        const stok = parseInt(document.getElementById('stokAlat').value);
+        const harga = parseInt(document.getElementById('hargaAlat').value);
+        const tglMasuk = document.getElementById('tglMasuk').value;
+
+        if (!kode || !nama || !kategori || !tglMasuk) {
+            alert('Semua field wajib diisi!');
+            return;
+        }
+        if (stok < 0 || harga < 0) {
+            alert('Stok dan harga tidak boleh negatif!');
+            return;
+        }
+
+        const kodeExists = daftarAlat.some(a => a.kode === kode && a.id != editId);
+        if (kodeExists) {
+            alert('Kode alat sudah digunakan!');
+            return;
+        }
+
+        if (editId) {
+            const index = daftarAlat.findIndex(a => a.id == editId);
+            if (index !== -1) {
+                daftarAlat[index] = {
+                    ...daftarAlat[index],
+                    kode, nama, kategori, stok, harga, tglMasuk
+                };
+                alert('✅ Alat berhasil diupdate!');
+            }
+        } else {
+            const newId = Date.now();
+            daftarAlat.push({
+                id: newId, kode, nama, kategori, stok, harga, tglMasuk
+            });
+            alert('✅ Alat berhasil ditambahkan!');
+        }
+
         saveToLocalStorage();
-        alert('✅ Alat berhasil ditambahkan!');
+        closeModal();
+        renderTabelAlat();
     }
-    closeModal();
+
+    function hapusAlat(id) {
+        const alat = daftarAlat.find(a => a.id === id);
+        if (confirm(`Hapus alat "${alat?.nama}" (${alat?.kode})?`)) {
+            daftarAlat = daftarAlat.filter(a => a.id !== id);
+            saveToLocalStorage();
+            renderTabelAlat();
+            alert('✅ Alat berhasil dihapus!');
+        }
+    }
+
+    function hapusSewa(id) {
+        const sewa = daftarSewa.find(s => s.id === id);
+        if (confirm(`Hapus penyewaan atas nama "${sewa?.nama}"?`)) {
+            daftarSewa = daftarSewa.filter(s => s.id !== id);
+            saveToLocalStorage();
+            renderTabelSewa();
+            renderTabelAlat();
+            alert('✅ Penyewaan berhasil dihapus!');
+        }
+    }
+
+    function showTab(tab) {
+        const tabAlat = document.getElementById('tab-alat');
+        const tabSewa = document.getElementById('tab-sewa');
+        const btns = document.querySelectorAll('.tab-btn');
+
+        if (tab === 'alat') {
+            tabAlat.classList.add('active');
+            tabSewa.classList.remove('active');
+            btns[0].classList.add('active');
+            btns[1].classList.remove('active');
+            renderTabelAlat();
+        } else {
+            tabAlat.classList.remove('active');
+            tabSewa.classList.add('active');
+            btns[0].classList.remove('active');
+            btns[1].classList.add('active');
+            renderTabelSewa();
+        }
+    }
+
+    loadFromLocalStorage();
     renderTabelAlat();
-}
+    renderTabelSewa();
 
-function hapusAlat(id) {
-    const alat = daftarAlat.find(a => a.id === id);
-    if (confirm(`Hapus alat "${alat?.nama}" (${alat?.kode})?`)) {
-        daftarAlat = daftarAlat.filter(a => a.id !== id);
-        saveToLocalStorage();
-        renderTabelAlat();
-        alert('✅ Alat berhasil dihapus!');
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalAlat');
+        if (event.target === modal) {
+            closeModal();
+        }
     }
-}
-
-function hapusSewa(id) {
-    const sewa = daftarSewa.find(s => s.id === id);
-    if (confirm(`Hapus penyewaan atas nama "${sewa?.nama}"?`)) {
-        daftarSewa = daftarSewa.filter(s => s.id !== id);
-        saveToLocalStorage();
-        renderTabelSewa();
-        renderTabelAlat();
-        alert('✅ Penyewaan berhasil dihapus!');
-    }
-}
-
-function showTab(tab) {
-    const tabAlat = document.getElementById('tab-alat');
-    const tabSewa = document.getElementById('tab-sewa');
-    const btns = document.querySelectorAll('.tab-btn');
-    if (tab === 'alat') {
-        tabAlat.classList.add('active');
-        tabSewa.classList.remove('active');
-        btns[0].classList.add('active');
-        btns[1].classList.remove('active');
-        renderTabelAlat();
-    } else {
-        tabAlat.classList.remove('active');
-        tabSewa.classList.add('active');
-        btns[0].classList.remove('active');
-        btns[1].classList.add('active');
-        renderTabelSewa();
-    }
-}
-
-loadFromLocalStorage();
-renderTabelAlat();
-renderTabelSewa();
-
-window.onclick = function(event) {
-    const modal = document.getElementById('modalAlat');
-    if (event.target === modal) closeModal();
-}
 </script>
 @endpush
 @endsection

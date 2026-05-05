@@ -3,68 +3,92 @@
 @section('title', 'Data Alat Pendakian - SummitBuddy')
 
 @section('hero')
-<div class="hero-small">
-    <h1>Data Alat Pendakian</h1>
-    <p>Lengkapi persiapan pendakianmu dengan alat terbaik</p>
-</div>
+<header class="hero-small">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Data Alat Pendakian</h1>
+        <p>Lengkapi persiapan pendakianmu dengan alat terbaik</p>
+    </div>
+</header>
 @endsection
 
 @section('content')
 <div style="display: flex; gap: 30px; flex-wrap: wrap;">
     <aside style="flex: 1; min-width: 220px;">
-        <h3>Filter Kategori</h3>
-        <div class="filter-group">
-            <label><input type="checkbox" value="Tenda" class="filter-cb"> 🏕️ Tenda</label>
-            <label><input type="checkbox" value="Carrier" class="filter-cb"> 🎒 Carrier</label>
-            <label><input type="checkbox" value="Sleeping" class="filter-cb"> 🛌 Sleeping Bag</label>
-            <label><input type="checkbox" value="Kompor" class="filter-cb"> 🔥 Kompor</label>
-            <label><input type="checkbox" value="Aksesoris" class="filter-cb"> 🔦 Aksesoris</label>
+        <h3 style="margin-bottom: 20px; color: #1b5e2f; border-bottom: 2px solid #ff8c42; padding-bottom: 8px; display: inline-block;">
+            <i class="fas fa-filter"></i> Filter Kategori
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin: 20px 0 30px 0;">
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: normal;">
+                <input type="checkbox" value="Tenda" class="filter-cb" style="width: 18px; height: 18px; cursor: pointer; accent-color: #1b5e2f; margin: 0;">
+                <span>🏕️ Tenda</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: normal;">
+                <input type="checkbox" value="Carrier" class="filter-cb" style="width: 18px; height: 18px; cursor: pointer; accent-color: #1b5e2f; margin: 0;">
+                <span>🎒 Carrier</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: normal;">
+                <input type="checkbox" value="Sleeping" class="filter-cb" style="width: 18px; height: 18px; cursor: pointer; accent-color: #1b5e2f; margin: 0;">
+                <span>🛌 Sleeping Bag</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: normal;">
+                <input type="checkbox" value="Kompor" class="filter-cb" style="width: 18px; height: 18px; cursor: pointer; accent-color: #1b5e2f; margin: 0;">
+                <span>🔥 Kompor</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; font-weight: normal;">
+                <input type="checkbox" value="Aksesoris" class="filter-cb" style="width: 18px; height: 18px; cursor: pointer; accent-color: #1b5e2f; margin: 0;">
+                <span>🔦 Aksesoris</span>
+            </label>
         </div>
-        <h3>📊 Statistik</h3>
-        <div class="stat-item"><span>Total Alat</span><span class="stat-value">51</span></div>
-        <div class="stat-item"><span>Tersedia</span><span class="stat-value">51</span></div>
-        <div class="stat-item"><span>Dipinjam</span><span class="stat-value">0</span></div>
+
+        <h3 style="margin-bottom: 15px; color: #1b5e2f; font-size: 18px;">📊 Statistik</h3>
+        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+            <span>Total Alat</span>
+            <span style="font-weight: bold; color: #ff8c42;">{{ $totalItem }}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+            <span>Tersedia</span>
+            <span style="font-weight: bold; color: #ff8c42;">{{ $tersedia }}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+            <span>Dipinjam</span>
+            <span style="font-weight: bold; color: #ff8c42;">{{ $dipinjam }}</span>
+        </div>
     </aside>
 
     <section style="flex: 3;">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Cari alat...">
-            <button id="searchBtn">🔍 Cari</button>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="Cari alat..." style="flex: 1; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 50px;">
+            <button id="searchBtn" style="padding: 12px 30px; background: linear-gradient(135deg, #1b5e2f, #43a047); color: white; border: none; border-radius: 50px; cursor: pointer;">🔍 Cari</button>
         </div>
 
-        <div class="table-container">
-            <table>
+        <div style="overflow-x: auto; margin: 20px 0;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden;">
                 <thead>
-                    <tr>
-                        <th>Kode</th>
-                        <th>Nama Alat</th>
-                        <th>Foto</th>
-                        <th>Kategori</th>
-                        <th>Stok</th>
-                        <th>Harga Sewa/Hari</th>
+                    <tr style="background: #1b5e2f; color: white;">
+                        <th style="padding: 12px; text-align: left;">Kode</th>
+                        <th style="padding: 12px; text-align: left;">Nama Alat</th>
+                        <th style="padding: 12px; text-align: left;">Foto</th>
+                        <th style="padding: 12px; text-align: left;">Kategori</th>
+                        <th style="padding: 12px; text-align: left;">Stok</th>
+                        <th style="padding: 12px; text-align: left;">Harga Sewa/Hari</th>
                     </tr>
                 </thead>
                 <tbody id="alatBody">
-                    @php
-                    $daftarAlat = [
-                        ['kode' => 'A001', 'nama' => 'Tenda Dome', 'kategori' => 'Tenda', 'stok' => 10, 'harga' => 100000],
-                        ['kode' => 'A002', 'nama' => 'Carrier 60L', 'kategori' => 'Carrier', 'stok' => 8, 'harga' => 80000],
-                        ['kode' => 'A003', 'nama' => 'Sleeping Bag', 'kategori' => 'Sleeping', 'stok' => 7, 'harga' => 50000],
-                        ['kode' => 'A004', 'nama' => 'Kompor Portable', 'kategori' => 'Kompor', 'stok' => 5, 'harga' => 40000],
-                        ['kode' => 'A005', 'nama' => 'Matras', 'kategori' => 'Aksesoris', 'stok' => 3, 'harga' => 30000],
-                        ['kode' => 'A006', 'nama' => 'Headlamp', 'kategori' => 'Aksesoris', 'stok' => 12, 'harga' => 25000],
-                        ['kode' => 'A007', 'nama' => 'Carrier 80L', 'kategori' => 'Carrier', 'stok' => 4, 'harga' => 100000],
-                        ['kode' => 'A008', 'nama' => 'Tenda 4 Season', 'kategori' => 'Tenda', 'stok' => 2, 'harga' => 150000],
-                    ];
-                    @endphp
                     @foreach($daftarAlat as $alat)
-                    <tr data-kategori="{{ $alat['kategori'] }}">
-                        <td>{{ $alat['kode'] }}</td>
-                        <td>{{ $alat['nama'] }}</td>
-                        <td><img src="https://via.placeholder.com/50?text=Alat" width="50" height="50" style="object-fit:cover; border-radius:8px;"></td>
-                        <td>{{ $alat['kategori'] }}</td>
-                        <td>{{ $alat['stok'] }}</td>
-                        <td>Rp {{ number_format($alat['harga'], 0, ',', '.') }}</td>
+                    <tr data-kode="{{ $alat['kode'] }}" data-nama="{{ $alat['nama'] }}" data-kategori="{{ $alat['kategori'] }}" style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 12px;">{{ $alat['kode'] }}</td>
+                        <td style="padding: 12px;">{{ $alat['nama'] }}</td>
+                        <td style="padding: 12px;">
+                            <img src="{{ asset($alat['foto']) }}"
+                                 alt="{{ $alat['nama'] }}"
+                                 width="50" height="50"
+                                 style="object-fit:cover; border-radius:8px;"
+                                 onerror="this.src='https://via.placeholder.com/50?text=No+Image'">
+                        </td>
+                        <td style="padding: 12px;">{{ $alat['kategori'] }}</td>
+                        <td style="padding: 12px;">{{ $alat['stok'] }}</td>
+                        <td style="padding: 12px;">Rp {{ number_format($alat['harga'], 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
                 </tbody>

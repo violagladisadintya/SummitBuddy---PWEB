@@ -1,62 +1,53 @@
 @extends('layouts.app')
 
-@section('title', 'Home - SummitBuddy')
+@section('title', 'Home - Sewa Alat Pendakian')
 
 @section('hero')
-<div class="hero">
-    <div>
+<header class="hero-home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
         <h1>SummitBuddy</h1>
         <p>Sistem Penyewaan Alat Pendakian</p>
+        <a href="{{ route('form-sewa') }}" class="btn-hero">Sewa Sekarang →</a>
     </div>
-</div>
+</header>
 @endsection
 
 @section('content')
-<h2>⚡ Alat Populer</h2>
-<div class="grid">
-    <div class="card">
-        <p>Tenda</p>
-        <span class="harga">Rp 100.000/hari</span>
+<section>
+    <h2>⚡ Alat Populer</h2>
+    <div class="grid">
+        @forelse($alatPopuler as $alat)
+        <div class="card">
+            <img src="{{ asset($alat['foto']) }}"
+                 alt="{{ $alat['nama'] }}"
+                 onerror="this.outerHTML='<div style=\'height:180px; background:#e0e0e0; display:flex; align-items:center; justify-content:center;\'>{{ $alat[\'nama\'] }}</div>'"
+            <p>{{ $alat['nama'] }}</p>
+            <span class="harga">Rp {{ number_format($alat['harga'], 0, ',', '.') }}/hari</span>
+        </div>
+        @empty
+        <p>Belum ada data alat</p>
+        @endforelse
     </div>
-    <div class="card">
-        <p>Carrier</p>
-        <span class="harga">Rp 80.000/hari</span>
-    </div>
-    <div class="card">
-        <p>Sleeping Bag</p>
-        <span class="harga">Rp 50.000/hari</span>
-    </div>
-    <div class="card">
-        <p>Kompor</p>
-        <span class="harga">Rp 40.000/hari</span>
-    </div>
-    <div class="card">
-        <p>Matras</p>
-        <span class="harga">Rp 30.000/hari</span>
-    </div>
-</div>
 
-<h2>⭐ Ulasan Pelanggan</h2>
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
-    <div class="card" style="text-align: left;">
-        <div style="color: #ffc107;">★★★★★</div>
-        <p>"Alat lengkap dan berkualitas! Pelayanannya ramah."</p>
-        <strong>- Andi Pratama</strong>
+    <h2>⭐ Ulasan Pelanggan</h2>
+    <div class="ulasan-grid">
+        @forelse($ulasan as $item)
+        <div class="ulasan-card">
+            <div class="rating">
+                @for($i = 1; $i <= 5; $i++)
+                    @if($i <= $item['rating']) ★ @else ☆ @endif
+                @endfor
+            </div>
+            <p class="ulasan-text">{{ $item['pesan'] }}</p>
+            <div class="ulasan-user">
+                <strong>- {{ $item['nama'] }}</strong>
+                <span>{{ $item['role'] }}</span>
+            </div>
+        </div>
+        @empty
+        <p>Belum ada ulasan</p>
+        @endforelse
     </div>
-    <div class="card" style="text-align: left;">
-        <div style="color: #ffc107;">★★★★★</div>
-        <p>"Tenda dan carrier dalam kondisi prima. Recommended!"</p>
-        <strong>- Sari Dewi</strong>
-    </div>
-    <div class="card" style="text-align: left;">
-        <div style="color: #ffc107;">★★★★☆</div>
-        <p>"Pelayanan cepat, alat lengkap. Overall oke!"</p>
-        <strong>- Budi Santoso</strong>
-    </div>
-    <div class="card" style="text-align: left;">
-        <div style="color: #ffc107;">★★★★★</div>
-        <p>"Sewa matras dan sleeping bag, bersih dan wangi. Mantap!"</p>
-        <strong>- Rina Wahyuni</strong>
-    </div>
-</div>
+</section>
 @endsection
