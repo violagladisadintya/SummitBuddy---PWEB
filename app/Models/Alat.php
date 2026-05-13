@@ -14,7 +14,7 @@ class Alat extends Model
 
     protected $fillable = [
         'kode', 'nama', 'kategori', 'stok', 'harga',
-        'deskripsi', 'foto', 'tgl_masuk', 'aktif'
+        'deskripsi', 'foto', 'tgl_masuk', 'aktif'  
     ];
 
     protected $casts = [
@@ -32,10 +32,5 @@ class Alat extends Model
     public function scopeTersedia($query)
     {
         return $query->where('stok', '>', 0)->where('aktif', true);
-    }
-
-    public function penyewas()
-    {
-    return $this->hasMany(Penyewa::class);
     }
 }

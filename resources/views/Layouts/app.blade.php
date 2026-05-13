@@ -32,6 +32,10 @@
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { width: 40px; height: 40px; object-fit: contain; }
         .logo span { font-size: 22px; font-weight: 800; }
+        .menu {
+            display: flex;
+            align-items: center;
+        }
         .menu a {
             color: white;
             margin-left: 25px;
@@ -41,7 +45,43 @@
             transition: all 0.3s ease;
             font-weight: 500;
         }
-        .menu a:hover, .menu a.active { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .menu a:hover, .menu a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        .auth-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+        .auth-menu span {
+            color: white;
+            font-weight: 500;
+        }
+        .auth-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .auth-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .auth-menu button {
+            background: #ff8c42;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .auth-menu button:hover {
+            background: #e67e22;
+        }
         .hero-home {
             margin-top: 70px;
             height: 550px;
@@ -164,6 +204,7 @@
         }
         .alert { padding: 15px; border-radius: 10px; margin-bottom: 20px; }
         .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         aside {
             background: white;
             padding: 25px;
@@ -264,11 +305,16 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert alert-error">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @yield('content')
 </div>
 
 @include('partials.footer')
-
 
 @stack('scripts')
 </body>

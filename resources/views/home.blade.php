@@ -21,7 +21,7 @@
         <div class="card">
             <img src="{{ asset($alat['foto']) }}"
                  alt="{{ $alat['nama'] }}"
-                 onerror="this.outerHTML='<div style=\'height:180px; background:#e0e0e0; display:flex; align-items:center; justify-content:center;\'>{{ $alat[\'nama\'] }}</div>'"
+                 onerror="this.outerHTML='<div style=\'height:180px; background:#e0e0e0; display:flex; align-items:center; justify-content:center;\'>{{ $alat['nama'] }}</div>'"
             <p>{{ $alat['nama'] }}</p>
             <span class="harga">Rp {{ number_format($alat['harga'], 0, ',', '.') }}/hari</span>
         </div>
