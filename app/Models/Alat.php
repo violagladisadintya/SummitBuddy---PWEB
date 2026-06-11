@@ -33,4 +33,19 @@ class Alat extends Model
     {
         return $query->where('stok', '>', 0)->where('aktif', true);
     }
+
+    public static function generateNextKode()
+    {
+        $latest = self::where('kode', 'like', 'A%')
+            ->orderByRaw('CAST(SUBSTRING(kode, 2) AS UNSIGNED) DESC')
+            ->first();
+
+        if (!$latest) {
+            return 'A001';
+        }
+
+        $number = (int) substr($latest->kode, 1);
+        $nextNumber = $number + 1;
+        return 'A' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+    }
 }

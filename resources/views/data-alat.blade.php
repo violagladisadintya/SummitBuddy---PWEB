@@ -62,8 +62,8 @@
             <button id="searchBtn" style="padding: 12px 30px; background: linear-gradient(135deg, #1b5e2f, #43a047); color: white; border: none; border-radius: 50px; cursor: pointer;">🔍 Cari</button>
         </div>
 
-        <div style="overflow-x: auto; margin: 20px 0;">
-            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden;">
+        <div class="table-container">
+            <table class="responsive-table" style="width: 100%; border-collapse: collapse; border-radius: 20px; overflow: hidden;">
                 <thead>
                     <tr style="background: #1b5e2f; color: white;">
                         <th style="padding: 12px; text-align: left;">Kode</th>
@@ -76,19 +76,19 @@
                 </thead>
                 <tbody id="alatBody">
                     @foreach($daftarAlat as $alat)
-                    <tr data-kode="{{ $alat['kode'] }}" data-nama="{{ $alat['nama'] }}" data-kategori="{{ $alat['kategori'] }}" style="border-bottom: 1px solid #ddd;">
-                        <td style="padding: 12px;">{{ $alat['kode'] }}</td>
-                        <td style="padding: 12px;">{{ $alat['nama'] }}</td>
-                        <td style="padding: 12px;">
-                            <img src="{{ asset($alat['foto']) }}"
-                                 alt="{{ $alat['nama'] }}"
-                                 width="50" height="50"
-                                 style="object-fit:cover; border-radius:8px;"
-                                 onerror="this.src='https://via.placeholder.com/50?text=No+Image'">
+                    <tr data-kode="{{ $alat['kode'] }}" data-nama="{{ $alat['nama'] }}" data-kategori="{{ $alat['kategori'] }}">
+                        <td data-label="Kode" style="padding: 12px;">{{ $alat['kode'] }}</td>
+                        <td data-label="Nama Alat" style="padding: 12px;">{{ $alat['nama'] }}</td>
+                        <td data-label="Foto" style="padding: 12px;">
+                             <img src="{{ asset($alat['foto']) }}"
+                                  alt="{{ $alat['nama'] }}"
+                                  width="50" height="50"
+                                  style="object-fit:cover; border-radius:8px;"
+                                  onerror="this.src='https://via.placeholder.com/50?text=No+Image'">
                         </td>
-                        <td style="padding: 12px;">{{ $alat['kategori'] }}</td>
-                        <td style="padding: 12px;">{{ $alat['stok'] }}</td>
-                        <td style="padding: 12px;">Rp {{ number_format($alat['harga'], 0, ',', '.') }}</td>
+                        <td data-label="Kategori" style="padding: 12px;">{{ $alat['kategori'] }}</td>
+                        <td data-label="Stok" style="padding: 12px;">{{ $alat['stok'] }}</td>
+                        <td data-label="Harga Sewa/Hari" style="padding: 12px;">Rp {{ number_format($alat['harga'], 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -6,43 +6,44 @@ use App\Http\Controllers\DataAlatController;
 use App\Http\Controllers\KelolaAlatController;
 use App\Http\Controllers\FormSewaController;
 use App\Http\Controllers\WeatherController;
-use App\Http\Controllers\PreferensiController;
-use App\Http\Controllers\KunjunganController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/data-alat', [DataAlatController::class, 'index'])->name('data-alat');
-Route::get('/form-sewa', [FormSewaController::class, 'index'])->name('form-sewa');
-Route::post('/form-sewa', [FormSewaController::class, 'store'])->name('form-sewa.store');
+// All application routes are protected by authentication middleware
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/data-alat', [DataAlatController::class, 'index'])->name('data-alat');
+    Route::get('/form-sewa', [FormSewaController::class, 'index'])->name('form-sewa');
+    Route::post('/form-sewa', [FormSewaController::class, 'store'])->name('form-sewa.store');
+    
+    // Customer history and receipt routes
+    Route::get('/riwayat-sewa', [FormSewaController::class, 'history'])->name('riwayat-sewa');
+    Route::get('/bukti-sewa/{id}', [FormSewaController::class, 'receipt'])->name('sewa.bukti');
+    Route::post('/review', [\App\Http\Controllers\ReviewController::class, 'store'])->name('review.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
+    Route::get('/api/weather', [WeatherController::class, 'getWeather'])->name('weather.get');
+
+    // User Profile Routes
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [\App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Admin-only routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('alat', AlatController::class);
-});
+    Route::get('/kelola-alat', [KelolaAlatController::class, 'index'])->name('kelola-alat');
+    
+    // Admin Rental CRUD actions
+    Route::post('/kelola-sewa', [FormSewaController::class, 'adminStore'])->name('sewa.admin.store');
+    Route::put('/kelola-sewa/{id}', [FormSewaController::class, 'adminUpdate'])->name('sewa.admin.update');
+    Route::delete('/kelola-sewa/{id}', [FormSewaController::class, 'destroy'])->name('sewa.destroy');
 
-Route::get('/kelola-alat', [KelolaAlatController::class, 'index'])->name('kelola-alat');
 
-Route::get('/weather', [WeatherController::class, 'index'])->name('weather.index');
-Route::get('/api/weather', [WeatherController::class, 'getWeather'])->name('weather.get');
-
-Route::get('/alat/live-search', [AlatController::class, 'liveSearch'])->name('alat.live-search');
-Route::get('/api/alats/search', [AlatController::class, 'searchJson'])->name('alat.search.json');
-Route::post('/api/alats', [AlatController::class, 'storeJson'])->name('alat.store.json');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/preferensi', [PreferensiController::class, 'index'])->name('preferensi.index');
-    Route::get('/api/preferensi', [PreferensiController::class, 'getPreferences'])->name('preferensi.get');
-    Route::post('/api/preferensi', [PreferensiController::class, 'savePreferences'])->name('preferensi.save');
-    Route::delete('/api/preferensi', [PreferensiController::class, 'resetPreferences'])->name('preferensi.reset');
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/kunjungan', [KunjunganController::class, 'index'])->name('kunjungan.index');
-    Route::get('/api/kunjungan/stats', [KunjunganController::class, 'getStats'])->name('kunjungan.stats');
-    Route::delete('/api/kunjungan/reset', [KunjunganController::class, 'reset'])->name('kunjungan.reset');
 });
 
 require __DIR__.'/auth.php';
+
