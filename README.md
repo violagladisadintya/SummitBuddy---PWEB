@@ -1,58 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**SummitBuddy** adalah platform penyewaan alat pendakian berbasis web yang dirancang untuk mempermudah proses peminjaman perlengkapan pendakian secara online. Sistem ini memungkinkan pelanggan melihat informasi alat yang tersedia, mengecek ketersediaan stok, melakukan penyewaan, serta mengunggah bukti pembayaran tanpa harus datang langsung ke lokasi penyewaan.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Selain membantu pelanggan, SummitBuddy juga menyediakan fitur manajemen bagi admin untuk mengelola data alat pendakian, memantau transaksi penyewaan, mengatur status peminjaman dan pengembalian alat, serta melihat laporan pendapatan secara terstruktur. Dengan adanya sistem ini, proses penyewaan yang sebelumnya dilakukan secara manual dapat menjadi lebih efisien, terorganisir, dan minim kesalahan.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Dibuat oleh: Viola Gladis Adintya (NIM: 242410101044)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Program Studi Sistem Informasi Fakultas Ilmu Komputer - Universitas Jember
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+🎥 Demo Video: https://youtu.be/rYTFfPuUei4
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Tujuan Pengembangan
+● Menyediakan informasi mengenai alat pendakian yang dapat diakses oleh pelanggan kapan saja tanpa harus datang langsung ke tempat penyewaan. 
+● Memudahkan pelanggan dalam melakukan pemesanan alat pendakian sesuai kebutuhan dan ketersediaan perlengkapan. 
+● Membantu pengelola dalam mengatur ketersediaan alat agar tidak terjadi bentrok jadwal penyewaan. 
+● Mempermudah pencatatan dan pemantauan transaksi penyewaan serta pengembalian alat. 
+● Menyediakan laporan penyewaan dan pendapatan yang dapat membantu pengelola dalam memantau perkembangan usaha.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Aplikasi **SummitBuddy** menyediakan fitur yang dirancang untuk memenuhi kebutuhan pelanggan maupun pengelola penyewaan alat pendakian.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Fitur Pengguna (User)
 
-## Agentic Development
+**Autentikasi**
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* Registrasi akun
+* Login akun
+* Logout akun
 
-```bash
-composer require laravel/boost --dev
+**Profil**
 
-php artisan boost:install
-```
+* Melihat profil pengguna
+* Mengubah data profil
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**Alat Pendakian**
 
-## Contributing
+* Melihat daftar alat pendakian
+* Melihat detail alat pendakian
+* Melihat ketersediaan alat
+* Melakukan penyewaan alat pendakian
+* Upload bukti transfer pembayaran
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Transaksi**
 
-## Code of Conduct
+* Pembatalan transaksi yang masih berstatus pending
+* Melihat transaksi aktif
+* Melihat riwayat transaksi
+* Filter transaksi berdasarkan status, kategori alat, dan tanggal penyewaan
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Ulasan**
 
-## Security Vulnerabilities
+* Membuat ulasan
+* Melihat ulasan pengguna lain
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Fitur Admin
 
-## License
+**Autentikasi**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Login akun
+* Logout akun
+* Lupa Password
+
+**Dashboard**
+
+* Melihat total transaksi
+* Melihat total pendapatan
+* Melihat jumlah alat yang tersedia
+* Monitoring aktivitas penyewaan
+
+**Pengelolaan Alat**
+
+* Menambah alat pendakian baru
+* Mengubah data alat pendakian
+* Mengatur status ketersediaan alat
+* Soft delete alat 
+
+**Transaksi**
+
+* Melihat seluruh transaksi pengguna
+* Mengonfirmasi penyewaan
+* Mengonfirmasi pengembalian alat
+* Menyelesaikan transaksi
+* Monitoring transaksi berdasarkan status
+
+**Ulasan**
+
+* Melihat ulasan pengguna
+
+## Teknologi yang Digunakan
+
+### Backend
+
+**PHP 8+** : Digunakan sebagai bahasa pemrograman utama untuk membangun logika bisnis dan proses pengolahan data pada sistem.
+
+**Laravel 12** : Framework PHP yang digunakan untuk mempercepat pengembangan aplikasi melalui fitur routing, middleware, authentication, migration, Eloquent ORM, serta manajemen keamanan aplikasi.
+
+### Frontend
+
+**HTML5** : Digunakan untuk membangun struktur halaman website.
+
+**CSS3** : Digunakan untuk mengatur tampilan antarmuka agar lebih menarik, responsif, dan mudah digunakan.
+
+**JavaScript** : Digunakan untuk meningkatkan interaktivitas sistem seperti validasi form, popup konfirmasi, pencarian data, dan manipulasi elemen halaman.
+
+**Blade Template Engine** : Digunakan sebagai template engine bawaan Laravel untuk membangun tampilan website secara dinamis dan efisien.
+
+### Database
+
+**MySQL** : Digunakan untuk menyimpan seluruh data aplikasi seperti data pengguna, alat pendakian, transaksi penyewaan, pengembalian alat, dan ulasan pengguna.
+
+### Tools Development
+
+**GitHub** : Digunakan sebagai repositori penyimpanan source code dan kolaborasi pengembangan.
+
+**Laragon** : Digunakan sebagai local development server selama proses pembangunan aplikasi.
+
+**Visual Studio Code** : Digunakan sebagai code editor utama dalam pengembangan sistem.
+
+## Struktur Database
+
+Sistem SummitBuddy menggunakan database relasional MySQL yang terdiri dari beberapa tabel utama berikut:
+
+users : Menyimpan data akun pengguna dan administrator.
+
+penyewas : Menyimpan data penyewa atau pelanggan yang melakukan transaksi penyewaan alat pendakian.
+
+alats : Menyimpan informasi alat pendakian yang tersedia untuk disewakan, seperti nama alat, kategori, stok, harga sewa, dan status ketersediaan.
+
+reviews : Menyimpan data ulasan dan penilaian yang diberikan oleh pengguna terhadap layanan SummitBuddy.
+
+sewas : Mencatat seluruh transaksi penyewaan alat pendakian, termasuk data penyewa, alat yang disewa, tanggal penyewaan, status transaksi, dan informasi pembayaran.
+
+## Status Transaksi
+
+Sistem menggunakan beberapa status transaksi untuk memantau proses penyewaan:
+
+* Tidak aktif
+* Aktif
+
+## Akun Akses Default
+
+Berikut akun yang dapat digunakan untuk melakukan pengujian sistem:
+
+### Admin
+
+Email: admin@summitbuddy.com
+
+Password: password
+
+### User
+
+Email: violagladis7@gmail.com
+
+Password: Adintya06
+
+## Lisensi
+
+Proyek ini dikembangkan untuk keperluan akademik dan pembelajaran sebagai Proyek Akhir Mata Kuliah Pemrograman Berbasis Website Program Studi Sistem Informasi Universitas Jember.
+
+Penggunaan, modifikasi, dan pengembangan lebih lanjut diperbolehkan untuk tujuan pendidikan dengan tetap mencantumkan kredit kepada pengembang.
+
